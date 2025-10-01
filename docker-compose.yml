@@ -1,0 +1,41 @@
+services:
+  api:
+    build:
+      context: ./SimpleApiBackend
+      dockerfile: Dockerfile
+    container_name: net_api
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+    develop:
+      watch:
+        - path: ./SimpleApiBackend/Program.cs
+          action: rebuild
+        - path: ./SimpleApiBackend/*.csproj
+          action: rebuild
+
+  frontend:
+    build:
+      context: ./nextjs-frontend
+      dockerfile: Dockerfile
+    container_name: next_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api 
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api:8080
+    volumes:
+      - ./nextjs-frontend:/app
+      - /app/node_modules
+    develop:
+      watch:
+        - path: ./nextjs-frontend
+          action: sync
+          target: /app
+          ignore:
+            - node_modules/
+        - path: ./nextjs-frontend/package.json
+          action: rebuild
+    command: npm run dev
