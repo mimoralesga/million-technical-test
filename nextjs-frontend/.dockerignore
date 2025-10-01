@@ -1,0 +1,4 @@
+# .dockerignore example
+node_modules
+npm-debug.log
+.git
