@@ -68,6 +68,47 @@ npm run lint
 npm run format
 ```
 
+## Desarrollo con Docker Compose (Recomendado)
+Para desarrollo con hot reload automático:
+
+```bash
+# Levantar ambos servicios con watch habilitado
+docker compose up --build
+
+# O en modo detached (segundo plano)
+docker compose up -d --build
+```
+
+- Frontend: `http://localhost:3000` (con hot reload)
+- Backend: `http://localhost:8080` (con hot reload)
+- Los cambios en código se reflejan automáticamente
+
+### Comandos útiles de Docker Compose
+```bash
+# Ver logs en tiempo real
+docker compose logs -f
+
+# Parar servicios
+docker compose down
+
+# Reconstruir solo un servicio
+docker compose up --build api
+docker compose up --build frontend
+```
+
+### Configuración de Hot Reload
+El `docker-compose.yml` está configurado para desarrollo con hot reload:
+
+**Backend (.NET):**
+- Watch automático en `Program.cs` y archivos `.csproj`
+- Rebuild automático cuando cambian estos archivos
+
+**Frontend (Next.js):**
+- Sincronización automática de archivos fuente
+- Volúmenes montados para desarrollo en vivo
+- Watch en `package.json` para reinstalar dependencias
+- Comando: `npm run dev` (modo desarrollo)
+
 ## Comprobación rápida end-to-end
 1) Levanta el backend:
    - Local: `ASPNETCORE_URLS=http://localhost:8080 dotnet run` dentro de `SimpleApiBackend/`, o
