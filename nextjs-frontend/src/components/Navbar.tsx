@@ -17,7 +17,9 @@ import {
 import { SlashIcon } from "lucide-react"
 import Link from "next/link"
 
-export default function Navbar() {
+export default function Navbar(props: { children: React.ReactNode }) {
+  const { children } = props;
+
   return (
     <header className="border-b px-4 md:px-6">
       <div className="flex h-16 items-center justify-between gap-4">
@@ -31,7 +33,7 @@ export default function Navbar() {
                   </Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbSeparator> <SlashIcon size={14} className="rotate-[340deg]" /> </BreadcrumbSeparator>
+              <NavbarBreadcrumbSeparator />
               <BreadcrumbItem className="md:hidden">
                 <DropdownMenu>
                   <DropdownMenuTrigger className="hover:text-foreground">
@@ -45,11 +47,7 @@ export default function Navbar() {
                   </DropdownMenuContent>
                 </DropdownMenu>
               </BreadcrumbItem>
-              <BreadcrumbItem className="max-md:hidden">
-                <BreadcrumbLink asChild>
-                  <Link href="/properties">Properties</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
+              {children}
             </BreadcrumbList>
           </Breadcrumb>
         </div>
@@ -60,3 +58,20 @@ export default function Navbar() {
     </header>
   )
 }
+
+function NavbarLink({ href, children }: { href: string, children: React.ReactNode }) {
+  return (
+    <BreadcrumbLink asChild>
+      <Link href={href}>{children}</Link>
+    </BreadcrumbLink>
+  )
+}
+
+function NavbarBreadcrumbSeparator() {
+  return (
+    <BreadcrumbSeparator><SlashIcon size={14} className="rotate-[340deg]" /></BreadcrumbSeparator>
+  )
+}
+
+Navbar.Link = NavbarLink;
+Navbar.BreadcrumbSeparator = NavbarBreadcrumbSeparator;
