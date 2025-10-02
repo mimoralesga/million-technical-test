@@ -8,7 +8,7 @@ import PropertyList from "./_components/PropertyList";
 export const searchParams = {
   q: parseAsString,
   min: parseAsInteger.withDefault(0),
-  max: parseAsInteger.withDefault(100000),
+  max: parseAsInteger.withDefault(1000000),
 }
 export const loadSearchParams = createLoader(searchParams)
 

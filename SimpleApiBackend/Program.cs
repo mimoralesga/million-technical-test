@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer(); 
@@ -18,7 +20,27 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapGet("/properties", () => properties);
+app.MapGet("/properties", ([FromQuery] string? q,[FromQuery] int? min, [FromQuery] int? max) => {
+    IEnumerable<Property> filteredProperties = properties;
+
+    if (!string.IsNullOrEmpty(q))
+    {
+        filteredProperties = filteredProperties.Where(p => p.Name.Contains(q, StringComparison.OrdinalIgnoreCase));
+    }
+
+    if (min.HasValue)
+    {
+        filteredProperties = filteredProperties.Where(p => p.Price >= min.Value);
+    }
+
+    if (max.HasValue)
+    {
+        filteredProperties = filteredProperties.Where(p => p.Price <= max.Value);
+    }
+
+    return filteredProperties;
+});
+
 app.MapGet("/properties/{id}", (int id) => properties.FirstOrDefault(p => p.Id == id));
 app.MapPost("/properties", (Property property) => properties.Add(property));
 app.MapPut("/properties/{id}", (int id, Property property) => {
