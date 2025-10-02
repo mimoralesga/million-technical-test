@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Million Technical Test",
-  description: "Million Technical Test",
+  title: "MILLION | Technical Test",
+  description: "MILLION Technical Test",
 };
 
 export default function RootLayout({
