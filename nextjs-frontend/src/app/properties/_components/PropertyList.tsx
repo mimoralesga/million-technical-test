@@ -1,12 +1,12 @@
 import { Property } from "@/services/properties.service";
 import PropertyItem from "./PropertyItem";
 
-export default function PropertyList({
+export default async function PropertyList({
   properties,
 }: {
   properties: Property[];
 }) {
-  return (
+  return properties.length > 0 ? (
     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
       {properties.map((property) => (
         <PropertyItem
@@ -18,6 +18,10 @@ export default function PropertyList({
           price={property.price}
         />
       ))}
+    </div>
+  ) : (
+    <div className="h-35 flex w-full border border-dashed p-4 items-center justify-center text-sm">
+      No properties found
     </div>
   );
 }

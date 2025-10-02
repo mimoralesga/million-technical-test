@@ -1,11 +1,9 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useState } from "react";
 import { FilterIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
@@ -15,9 +13,15 @@ import SliderWithOutput from "./SliderWithOutput";
 import { parseAsInteger, useQueryState } from "nuqs";
 
 export default function FilterButton() {
-  const [min, setMin] = useQueryState("min", parseAsInteger);
-  const [max, setMax] = useQueryState("max", parseAsInteger);
-  const [value, setValue] = useState([min ?? 0, max ?? 1000000]);
+  const [min, setMin] = useQueryState(
+    "min",
+    parseAsInteger.withDefault(0).withOptions({ shallow: false }),
+  );
+  const [max, setMax] = useQueryState(
+    "max",
+    parseAsInteger.withDefault(1000000).withOptions({ shallow: false }),
+  );
+  const [value, setValue] = useState([min, max]);
   const [open, setOpen] = useState(false);
 
   const handleChange = (value: number[]) => {

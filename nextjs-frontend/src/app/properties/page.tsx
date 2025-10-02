@@ -1,25 +1,28 @@
+import {
+  createLoader,
+  SearchParams,
+  parseAsString,
+  parseAsInteger,
+} from "nuqs/server";
+
 import Navbar from "@/components/Navbar";
 import PropertiesToolbar from "./_components/PropertiesToolbar";
-import { Suspense } from "react";
-import { getProperties } from "@/services/properties.service";
-import { createLoader, SearchParams, parseAsString, parseAsInteger } from 'nuqs/server'
 import PropertyList from "./_components/PropertyList";
+import { getProperties } from "@/services/properties.service";
 
 export const searchParams = {
   q: parseAsString,
   min: parseAsInteger.withDefault(0),
   max: parseAsInteger.withDefault(1000000),
-}
-export const loadSearchParams = createLoader(searchParams)
+};
+export const loadSearchParams = createLoader(searchParams);
 
 type PageProps = {
-  searchParams: Promise<SearchParams>
-}
+  searchParams: Promise<SearchParams>;
+};
 
-export default async function Properties({
-  searchParams,
-}: PageProps) {
-  const { q, min, max } = await loadSearchParams(searchParams)
+export default async function Properties({ searchParams }: PageProps) {
+  const { q, min, max } = await loadSearchParams(searchParams);
   const properties = await getProperties(q, min, max);
 
   return (
@@ -31,9 +34,7 @@ export default async function Properties({
         <h1 className="text-xl prose text-foreground mt-4 md:mt-12 mb-12">
           Properties
         </h1>
-        <Suspense fallback={<div>Loading...</div>}>
-          <PropertiesToolbar />
-        </Suspense>
+        <PropertiesToolbar />
         <PropertyList properties={properties} />
       </div>
     </>

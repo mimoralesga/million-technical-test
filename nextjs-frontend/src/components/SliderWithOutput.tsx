@@ -34,6 +34,7 @@ export default function SliderWithOutput({
         onValueChange={handleValueChange}
         min={0}
         max={1000000}
+        step={10000}
         aria-label="Price Range"
       />
     </div>

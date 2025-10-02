@@ -2,20 +2,24 @@
 
 import { Search } from "lucide-react";
 import Link from "next/link";
-import { useQueryState } from "nuqs";
-
+import { parseAsString, useQueryState, debounce } from "nuqs";
 import FilterButton from "@/components/FilterButton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 export default function PropertiesToolbar() {
-  const [name, setName] = useQueryState("q");
+  const [name, setName] = useQueryState(
+    "q",
+    parseAsString.withDefault("").withOptions({ shallow: false }),
+  );
 
   const handleSearch = (value: string) => {
     if (value === "") {
       setName(null);
     } else {
-      setName(value);
+      setName(value, {
+        limitUrlUpdates: value === "" ? undefined : debounce(500),
+      });
     }
   };
 
