@@ -42,7 +42,9 @@ export default function Navbar(props: { children: React.ReactNode }) {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start">
                     <DropdownMenuItem asChild>
-                      <Link href="/properties" className="hover:cursor-pointer">Properties</Link>
+                      <Link href="/properties" className="hover:cursor-pointer">
+                        Properties
+                      </Link>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>

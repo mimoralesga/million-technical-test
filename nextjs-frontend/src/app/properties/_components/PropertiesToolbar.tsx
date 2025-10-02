@@ -37,7 +37,7 @@ export default function PropertiesToolbar() {
       </div>
       <div>
         <Button className="h-7" asChild>
-          <Link href="/properties/add">Add Property</Link>
+          <Link href="/properties/add">Add a new Property</Link>
         </Button>
       </div>
     </div>

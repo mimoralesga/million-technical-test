@@ -21,6 +21,7 @@ export default function Properties() {
             id="1"
             name="Property 1"
             address="123 Main St"
+            image={null}
             price={100000}
           />
         </div>
