@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 export default function PropertiesToolbar() {
-  const [name, setName] = useQueryState("q", { history: "replace" });
+  const [name, setName] = useQueryState("q");
 
   const handleSearch = (value: string) => {
     if (value === "") {

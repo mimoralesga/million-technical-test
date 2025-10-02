@@ -1,6 +1,6 @@
 import { fetchClient } from "./api";
 
-interface Property {
+export interface Property {
   id: string;
   name: string;
   address: string;
@@ -9,6 +9,21 @@ interface Property {
   year: number;
 }
 
-export const getProperties = async () => {
-  return fetchClient<Property[]>("/properties");
+export const getProperties = async (
+  q: string | null,
+  min: number,
+  max: number,
+) => {
+  const searchParams = new URLSearchParams();
+
+  if (q !== null) {
+    searchParams.append("q", q);
+  }
+
+  searchParams.append("min", min.toString());
+  searchParams.append("max", max.toString());
+
+  return fetchClient<Property[]>(`/properties?${searchParams.toString()}`, {
+    method: "GET",
+  });
 };

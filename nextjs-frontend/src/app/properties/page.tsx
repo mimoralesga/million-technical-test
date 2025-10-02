@@ -1,9 +1,27 @@
 import Navbar from "@/components/Navbar";
 import PropertiesToolbar from "./_components/PropertiesToolbar";
 import { Suspense } from "react";
-import PropertyItem from "./_components/PropertyItem";
+import { getProperties } from "@/services/properties.service";
+import { createLoader, SearchParams, parseAsString, parseAsInteger } from 'nuqs/server'
+import PropertyList from "./_components/PropertyList";
 
-export default function Properties() {
+export const searchParams = {
+  q: parseAsString,
+  min: parseAsInteger.withDefault(0),
+  max: parseAsInteger.withDefault(100000),
+}
+export const loadSearchParams = createLoader(searchParams)
+
+type PageProps = {
+  searchParams: Promise<SearchParams>
+}
+
+export default async function Properties({
+  searchParams,
+}: PageProps) {
+  const { q, min, max } = await loadSearchParams(searchParams)
+  const properties = await getProperties(q, min, max);
+
   return (
     <>
       <Navbar>
@@ -16,15 +34,7 @@ export default function Properties() {
         <Suspense fallback={<div>Loading...</div>}>
           <PropertiesToolbar />
         </Suspense>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          <PropertyItem
-            id="1"
-            name="Property 1"
-            address="123 Main St"
-            image={null}
-            price={100000}
-          />
-        </div>
+        <PropertyList properties={properties} />
       </div>
     </>
   );

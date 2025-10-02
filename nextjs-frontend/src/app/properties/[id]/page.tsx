@@ -8,7 +8,6 @@ import DetailsSection from "../_components/DetailsSection";
 import OwnerSection from "../_components/OwnerSection";
 import TimelineTrace from "@/components/TimelineTrace";
 
-
 const initialBgImage = [
   {
     name: "placehold.co.jpg",
