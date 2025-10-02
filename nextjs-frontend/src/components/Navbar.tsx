@@ -36,13 +36,13 @@ export default function Navbar(props: { children: React.ReactNode }) {
               <NavbarBreadcrumbSeparator />
               <BreadcrumbItem className="md:hidden">
                 <DropdownMenu>
-                  <DropdownMenuTrigger className="hover:text-foreground">
+                  <DropdownMenuTrigger className="hover:text-foreground hover:cursor-pointer">
                     <BreadcrumbEllipsis />
                     <span className="sr-only">Toggle menu</span>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start">
                     <DropdownMenuItem asChild>
-                      <a href="#">Properties</a>
+                      <Link href="/properties" className="hover:cursor-pointer">Properties</Link>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -67,7 +67,7 @@ function NavbarLink({
   children: React.ReactNode;
 }) {
   return (
-    <BreadcrumbLink asChild>
+    <BreadcrumbLink asChild className="hidden md:block">
       <Link href={href}>{children}</Link>
     </BreadcrumbLink>
   );

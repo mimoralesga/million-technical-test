@@ -1,6 +1,10 @@
 import Navbar from "@/components/Navbar";
 
-export default function PropertyDetails({ params }: { params: { id: string } }) {
+export default function PropertyDetails({
+  params,
+}: {
+  params: { id: string };
+}) {
   const { id } = params;
 
   return (
