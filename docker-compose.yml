@@ -27,9 +27,6 @@ services:
       - api 
     environment:
       - NEXT_PUBLIC_API_URL=http://api:8080
-    volumes:
-      - ./nextjs-frontend:/app
-      - /app/node_modules
     develop:
       watch:
         - path: ./nextjs-frontend
@@ -39,4 +36,3 @@ services:
             - node_modules/
         - path: ./nextjs-frontend/package.json
           action: rebuild
-    command: npm run dev

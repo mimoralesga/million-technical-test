@@ -1,24 +1,15 @@
-FROM node:20 AS deps
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm install --frozen-lockfile
+FROM node:20-slim
 
-FROM node:20 AS builder
-WORKDIR /app
-COPY . .
-COPY --from=deps /app/node_modules ./node_modules
-RUN npm run build # Compila tu aplicación Next.js
+RUN corepack enable
 
-FROM node:20 AS runner
 WORKDIR /app
 
-USER node
+COPY ./package.json ./pnpm-lock.yaml ./
 
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
+RUN pnpm install
+
+COPY ./ .
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["pnpm", "dev"]
