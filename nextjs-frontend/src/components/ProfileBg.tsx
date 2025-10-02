@@ -3,10 +3,11 @@
 import { useFileUpload } from "@/hooks/use-file-upload";
 import { ImagePlusIcon, XIcon } from "lucide-react";
 
-export default function ProfileBg() {
+export default function ProfileBg({ initialBgImage }: { initialBgImage?: any }) {
   const [{ files }, { removeFile, openFileDialog, getInputProps }] =
     useFileUpload({
       accept: "image/*",
+      initialFiles: initialBgImage,
     });
 
   const currentImage = files[0]?.preview || null;
