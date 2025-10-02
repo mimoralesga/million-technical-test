@@ -1,6 +1,11 @@
 export default function Logo({ className }: { className?: string }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 500 100" className={className}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+      viewBox="0 0 500 100"
+      className={className}
+    >
       <g>
         <g id="Layer_2">
           <g>

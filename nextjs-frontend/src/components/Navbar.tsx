@@ -1,5 +1,5 @@
-import Logo from "@/components/navbar-components/logo"
-import UserMenu from "@/components/navbar-components/user-menu"
+import Logo from "@/components/navbar-components/logo";
+import UserMenu from "@/components/navbar-components/user-menu";
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -7,15 +7,15 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+} from "@/components/ui/breadcrumb";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { SlashIcon } from "lucide-react"
-import Link from "next/link"
+} from "@/components/ui/dropdown-menu";
+import { SlashIcon } from "lucide-react";
+import Link from "next/link";
 
 export default function Navbar(props: { children: React.ReactNode }) {
   const { children } = props;
@@ -56,21 +56,29 @@ export default function Navbar(props: { children: React.ReactNode }) {
         </div>
       </div>
     </header>
-  )
+  );
 }
 
-function NavbarLink({ href, children }: { href: string, children: React.ReactNode }) {
+function NavbarLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
   return (
     <BreadcrumbLink asChild>
       <Link href={href}>{children}</Link>
     </BreadcrumbLink>
-  )
+  );
 }
 
 function NavbarBreadcrumbSeparator() {
   return (
-    <BreadcrumbSeparator><SlashIcon size={14} className="rotate-[340deg]" /></BreadcrumbSeparator>
-  )
+    <BreadcrumbSeparator>
+      <SlashIcon size={14} className="rotate-[340deg]" />
+    </BreadcrumbSeparator>
+  );
 }
 
 Navbar.Link = NavbarLink;
