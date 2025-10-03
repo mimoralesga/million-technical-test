@@ -1,4 +1,16 @@
 services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_db
+    restart: always
+    ports:
+      - "27017:27017" 
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - mongo_data:/data/db
+    command: ["--quiet"]
   api:
     build:
       context: ./SimpleApiBackend
@@ -6,9 +18,16 @@ services:
     container_name: net_api
     ports:
       - "8080:8080"
+      - "5001:5000" # Puerto HTTP del contenedor
+      - "9000:9000" # Puerto de depuración (puedes elegir otro, 9000 es común para C#)
+    depends_on:
+      - mongodb 
     environment:
       - ASPNETCORE_URLS=http://+:8080
       - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__MongoDbConnection=mongodb://user:password@mongodb:27017
+      - DatabaseSettings__DatabaseName=PropertyDb
+
     develop:
       watch:
         - path: ./SimpleApiBackend/Program.cs
@@ -37,3 +56,5 @@ services:
             - node_modules/
         - path: ./nextjs-frontend/package.json
           action: rebuild
+volumes:
+  mongo_data:

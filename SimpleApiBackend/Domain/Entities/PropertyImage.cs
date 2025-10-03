@@ -2,6 +2,6 @@ namespace SimpleApiBackend.Domain.Entities;
 
 public class PropertyImage
 {
-    public required string File { get; set; }
+    public string File { get; set; }
     public bool Enabled { get; set; }
 }

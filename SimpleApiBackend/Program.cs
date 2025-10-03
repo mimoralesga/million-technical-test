@@ -1,17 +1,32 @@
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
+using SimpleApiBackend.Application.Features;
+using SimpleApiBackend.Application.Features.ListProperties;
+using SimpleApiBackend.Application.Interfaces;
+using SimpleApiBackend.Infrastructure.Repositories;
+using SimpleApiBackend.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("MongoDbConnection") ?? "mongodb://localhost:27017";
+var databaseName = builder.Configuration["DatabaseSettings:DatabaseName"] ?? "PropertyDb";
+
+builder.Services.AddSingleton<IMongoClient>(new MongoClient(connectionString));
+builder.Services.AddScoped<MongoDbSeeder>(); 
+
+builder.Services.AddScoped(sp => 
+{
+    var client = sp.GetRequiredService<IMongoClient>();
+    return client.GetDatabase(databaseName);
+});
 
 builder.Services.AddEndpointsApiExplorer(); 
 builder.Services.AddSwaggerGen();
 
-var properties = new List<Property>
-{
-    new Property (1, "Property 1", "123 Main St", 100000, "P1", 2020),
-    new Property (2, "Property 2", "456 Main St", 200000, "P2", 2021),
-    new Property (3, "Property 3", "789 Main St", 300000, "P3", 2022),
-};
+builder.Services.AddScoped<IPropertyRepository, PropertyMongoRepository>();
+builder.Services.AddScoped<IOwnerRepository, OwnerMongoRepository>();
+builder.Services.AddScoped<GetPropertyDetailsHandler>(); 
+builder.Services.AddScoped<ListPropertiesHandler>(); 
 
 var app = builder.Build();
 
@@ -19,40 +34,24 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    using var scope = app.Services.CreateScope();
+    var seeder = scope.ServiceProvider.GetRequiredService<MongoDbSeeder>();
+    await seeder.SeedDataAsync();
 }
 
-app.MapGet("/properties", ([FromQuery] string? q,[FromQuery] int? min, [FromQuery] int? max) => {
-    IEnumerable<Property> filteredProperties = properties;
-
-    if (!string.IsNullOrEmpty(q))
-    {
-        filteredProperties = filteredProperties.Where(p => p.Name.Contains(q, StringComparison.OrdinalIgnoreCase));
-    }
-
-    if (min.HasValue)
-    {
-        filteredProperties = filteredProperties.Where(p => p.Price >= min.Value);
-    }
-
-    if (max.HasValue)
-    {
-        filteredProperties = filteredProperties.Where(p => p.Price <= max.Value);
-    }
-
-    return filteredProperties;
+app.MapGet("/properties", async (ListPropertiesHandler handler, [AsParameters] PropertyFilterQuery query) => {
+    var result = await handler.Handle(query);
+    
+    return Results.Ok(result);
 });
 
-app.MapGet("/properties/{id}", (int id) => properties.FirstOrDefault(p => p.Id == id));
-app.MapPost("/properties", (Property property) => properties.Add(property));
-app.MapPut("/properties/{id}", (int id, Property property) => {
-    var existingProperty = properties.FirstOrDefault(p => p.Id == id);
-    if (existingProperty != null) {
-        existingProperty = property;
-    }
-    return existingProperty;
-});
-app.MapDelete("/properties/{id}", (int id) => {
-    properties.RemoveAll(p => p.Id == id);
+app.MapGet("/properties/{id}", async (string id, GetPropertyDetailsHandler handler) => {
+    var details = await handler.Handle(id);
+
+    return details is not null
+        ? Results.Ok(details)
+        : Results.NotFound();           
 });
 
 app.Run();

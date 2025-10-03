@@ -1,4 +1,4 @@
-namespace SimpleApiBackend.Infrastructure.Features;
+namespace SimpleApiBackend.Application.Features.ListProperties;
 
 public record PropertyListItemDto(
     string Id,
