@@ -56,6 +56,3 @@ app.MapDelete("/properties/{id}", (int id) => {
 });
 
 app.Run();
-
-
-public record Property(int Id, string Name, string Address, int Price, string Code, int Year);

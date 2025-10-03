@@ -1,3 +1,5 @@
+namespace SimpleApiBackend.Infrastructure.Features;
+
 public record PropertyDetailsDto(
     string Id,
     string Name,
