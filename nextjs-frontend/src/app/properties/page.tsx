@@ -9,11 +9,12 @@ import Navbar from "@/components/Navbar";
 import PropertiesToolbar from "./_components/PropertiesToolbar";
 import PropertyList from "./_components/PropertyList";
 import { getProperties } from "@/services/properties.service";
+import { PRICE_FILTER_MAX, PRICE_FILTER_MIN } from "@/lib/constans";
 
 export const searchParams = {
   q: parseAsString,
-  min: parseAsInteger.withDefault(0),
-  max: parseAsInteger.withDefault(1000000),
+  min: parseAsInteger.withDefault(PRICE_FILTER_MIN),
+  max: parseAsInteger.withDefault(PRICE_FILTER_MAX),
 };
 export const loadSearchParams = createLoader(searchParams);
 

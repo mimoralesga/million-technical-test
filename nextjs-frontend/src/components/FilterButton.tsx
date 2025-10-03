@@ -11,15 +11,20 @@ import {
 } from "@/components/ui/popover";
 import SliderWithOutput from "./SliderWithOutput";
 import { parseAsInteger, useQueryState } from "nuqs";
+import { PRICE_FILTER_MAX, PRICE_FILTER_MIN } from "@/lib/constans";
 
 export default function FilterButton() {
   const [min, setMin] = useQueryState(
     "min",
-    parseAsInteger.withDefault(0).withOptions({ shallow: false }),
+    parseAsInteger
+      .withDefault(PRICE_FILTER_MIN)
+      .withOptions({ shallow: false }),
   );
   const [max, setMax] = useQueryState(
     "max",
-    parseAsInteger.withDefault(1000000).withOptions({ shallow: false }),
+    parseAsInteger
+      .withDefault(PRICE_FILTER_MAX)
+      .withOptions({ shallow: false }),
   );
   const [value, setValue] = useState([min, max]);
   const [open, setOpen] = useState(false);

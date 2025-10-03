@@ -4,6 +4,12 @@ import { useState } from "react";
 
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
+import { formatCurrency } from "@/lib/utils";
+import {
+  PRICE_FILTER_MAX,
+  PRICE_FILTER_MIN,
+  PRICE_FILTER_STEP,
+} from "@/lib/constans";
 
 interface SliderWithOutputProps {
   defaultValue: number[];
@@ -26,15 +32,15 @@ export default function SliderWithOutput({
       <div className="flex items-center justify-between gap-2">
         <Label className="leading-6 text-xs">Price Range</Label>
         <output className="font-medium tabular-nums">
-          ${value[0]} - ${value[1]}
+          {formatCurrency(value[0])} - {formatCurrency(value[1])}
         </output>
       </div>
       <Slider
         value={value}
         onValueChange={handleValueChange}
-        min={0}
-        max={1000000}
-        step={10000}
+        min={PRICE_FILTER_MIN}
+        max={PRICE_FILTER_MAX}
+        step={PRICE_FILTER_STEP}
         aria-label="Price Range"
       />
     </div>

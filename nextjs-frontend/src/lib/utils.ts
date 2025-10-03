@@ -16,3 +16,18 @@ export const getApiUrl = (): string => {
 
   return apiUrl;
 };
+
+export const formatCurrency = (value: number) => {
+  if (isNaN(value)) {
+    return "N/A";
+  }
+
+  const formattedPrice = value.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
+
+  return formattedPrice;
+};
