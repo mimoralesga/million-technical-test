@@ -1,13 +1,5 @@
+import { Property } from "@/types/property";
 import { fetchClient } from "./api";
-
-export interface Property {
-  id: string;
-  name: string;
-  address: string;
-  price: number;
-  code: string;
-  year: number;
-}
 
 export const getProperties = async (
   q: string | null,
@@ -24,6 +16,12 @@ export const getProperties = async (
   searchParams.append("max", max.toString());
 
   return fetchClient<Property[]>(`/properties?${searchParams.toString()}`, {
+    method: "GET",
+  });
+};
+
+export const getPropertyById = (id: number) => {
+  return fetchClient<Property>(`/properties/${id}`, {
     method: "GET",
   });
 };

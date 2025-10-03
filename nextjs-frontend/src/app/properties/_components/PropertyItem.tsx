@@ -1,18 +1,9 @@
+import { Property } from "@/types/property";
 import Link from "next/link";
 
-export default function PropertyItem({
-  id,
-  name,
-  address,
-  price,
-  image,
-}: {
-  id: string;
-  name: string;
-  address: string;
-  price: number;
-  image: string | null;
-}) {
+export default function PropertyItem({ property }: { property: Property }) {
+  const { id, price, image, name, address } = property;
+  const { file } = image ?? {};
   const formattedPrice = price.toLocaleString("en-US", {
     style: "currency",
     currency: "USD",
@@ -24,7 +15,7 @@ export default function PropertyItem({
     <Link href={`/properties/${id}`}>
       <div className="border rounded shadow-xs hover:bg-muted/50 overflow-hidden group">
         <img
-          src={image ?? "https://placehold.co/600x400"}
+          src={file?.url ?? "https://placehold.co/600x400"}
           alt="Property Image"
           className="w-full h-48 object-cover group-hover:scale-105 transition-all duration-300"
         />
