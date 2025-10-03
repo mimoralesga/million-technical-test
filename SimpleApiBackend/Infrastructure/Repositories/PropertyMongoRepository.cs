@@ -20,11 +20,13 @@ public class PropertyMongoRepository : IPropertyRepository
 
         if (!string.IsNullOrWhiteSpace(q))
         {
-            var qFilter = Builders<Property>.Filter.Regex(
-                p => p.Name, 
-                new BsonRegularExpression(q, "i")
-            );
-            filter &= qFilter;
+            var regex = new BsonRegularExpression(q, "i");
+            var nameFilter = Builders<Property>.Filter.Regex(p => p.Name, regex);
+            var addressFilter = Builders<Property>.Filter.Regex(p => p.Address, regex);
+        
+            var combinedTextFilter = Builders<Property>.Filter.Or(nameFilter, addressFilter);
+
+            filter &= combinedTextFilter;
         }
 
         if (min.HasValue)
