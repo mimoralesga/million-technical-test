@@ -1,0 +1,18 @@
+# Binarios y carpetas de compilación
+[Bb]in/
+[Oo]bj/
+
+# Paquetes NuGet y dependencias
+*.nupkg
+[Pp]ackages/
+.nuget/
+
+# Archivos de depuración y registro
+*.pdb
+*.log
+[Dd]ebug/
+
+# Variables de Entorno y secretos
+.env
+.env.local
+.env.*.local

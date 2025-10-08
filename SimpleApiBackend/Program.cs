@@ -6,6 +6,7 @@ using SimpleApiBackend.Application.Interfaces;
 using SimpleApiBackend.Infrastructure.Repositories;
 using SimpleApiBackend.Infrastructure.Services;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("MongoDbConnection") ?? "mongodb://localhost:27017";
@@ -55,3 +56,5 @@ app.MapGet("/properties/{id}", async (string id, GetPropertyDetailsHandler handl
 });
 
 app.Run();
+
+public partial class Program { }
