@@ -1,0 +1,28 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Ejecuta pruebas del frontend antes de permitir el push
+echo "Running unit tests (frontend)..."
+cd nextjs-frontend || exit 1
+
+# Detectar gestor de paquetes
+if command -v pnpm >/dev/null 2>&1; then
+  PNPM=1
+fi
+
+if [ "$PNPM" = "1" ]; then
+  pnpm test:ci
+else
+  npm run test:ci --silent
+fi
+
+RESULT=$?
+
+if [ $RESULT -ne 0 ]; then
+  echo "\nTests failed. Aborting push."
+  exit 1
+fi
+
+echo "Tests passed. Proceeding with push."
+exit 0
+
