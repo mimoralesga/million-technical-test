@@ -36,9 +36,10 @@ public class GetPropertyDetailsHandler
             owner.Photo
         );
         
-        var imageDtos = property.Images
-            .Select(i => new ImageDto(i.File, i.Enabled))
-            .ToList();
+        var image = property.Images
+            .Select(i => new ImageDto(i.FileUrl, i.Enabled))
+            .ToList()
+            .FirstOrDefault();
             
         var traceDtos = property.Traces
             .Select(t => new TraceDto(t.DateSale, t.Name, t.Value, t.Tax))
@@ -52,7 +53,7 @@ public class GetPropertyDetailsHandler
             property.Year,
             property.CodeInternal,
             ownerDto,
-            imageDtos,
+            image,
             traceDtos
         );
     }

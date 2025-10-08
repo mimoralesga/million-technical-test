@@ -1,6 +1,4 @@
 export interface PropertyImage {
-  file: {
-    url: string;
-  };
+  fileUrl: string;
   enabled: boolean;
 }

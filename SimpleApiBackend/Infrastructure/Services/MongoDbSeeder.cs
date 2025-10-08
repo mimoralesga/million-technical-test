@@ -67,11 +67,11 @@ public class MongoDbSeeder(IMongoDatabase database)
                         Name = "Rivage Bal Harbour",
                         Images = [
                             new PropertyImage {
-                                File = "/RBH-46.webp",
+                                FileUrl = "/RBH-46.webp",
                                 Enabled = true
                             }
                         ],
-                        Traces = [],
+                        Traces = traces,
                         Year = 2025
                     },
                     new Property {
@@ -82,11 +82,11 @@ public class MongoDbSeeder(IMongoDatabase database)
                         Name = "Rivage Bal Harbour",
                         Images = [
                             new PropertyImage {
-                                File = "/RBH-45.webp",
+                                FileUrl = "/RBH-45.webp",
                                 Enabled = true
                             }
                         ],
-                        Traces = [],
+                        Traces = traces,
                         Year = 2020
                     },
                     new Property {
@@ -97,11 +97,11 @@ public class MongoDbSeeder(IMongoDatabase database)
                         Name = "Bay Harbor Islands",
                         Images = [
                             new PropertyImage {
-                                File = "/BHI-89.webp",
+                                FileUrl = "/BHI-89.webp",
                                 Enabled = true
                             }
                         ],
-                        Traces = [],
+                        Traces = traces,
                         Year = 2010
                     },
                 ]

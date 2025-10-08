@@ -16,7 +16,8 @@ public class ListPropertiesHandler(IPropertyRepository propertyRepository)
                 p.Name,
                 p.Address,
                 p.Price,
-                p.CodeInternal
+                p.CodeInternal,
+                p.Images.FirstOrDefault()
             ))
             .ToList();
 

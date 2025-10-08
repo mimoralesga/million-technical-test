@@ -10,7 +10,7 @@ public record PropertyDetailsDto(
     
     OwnerInfoDto OwnerDetails, 
 
-    IReadOnlyList<ImageDto> Images,
+    ImageDto? Image,
     IReadOnlyList<TraceDto> Traces
 );
 
