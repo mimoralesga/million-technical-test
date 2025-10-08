@@ -28,7 +28,7 @@ function makeProperty(overrides: Partial<Property> = {}): Property {
 }
 
 describe('DetailsSection', () => {
-  it('Render the title and all fields.', () => {
+  it('render the title and all fields.', () => {
     const property = makeProperty()
     render(<DetailsSection property={property} />)
 
