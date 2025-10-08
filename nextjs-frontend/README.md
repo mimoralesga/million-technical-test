@@ -31,6 +31,44 @@ docker run --rm -p 3000:3000 \
   nextjs-frontend:dev
 ```
 
+## Ejecutar pruebas
+
+### Pruebas unitarias
+```bash
+# Ejecutar todas las pruebas
+npm run test
+# o
+pnpm test
+
+# Ejecutar en modo watch (desarrollo)
+npm run test -- --watch
+# o
+pnpm test -- --watch
+
+# Ejecutar con cobertura
+npm run test -- --coverage
+# o
+pnpm test -- --coverage
+
+# Ejecutar pruebas específicas
+npm run test -- --run DetailsItem
+# o
+pnpm test -- --run DetailsItem
+```
+
+### Lint y formato
+```bash
+# Verificar linting
+npm run lint
+# o
+pnpm lint
+
+# Formatear código
+npm run format
+# o
+pnpm format
+```
+
 ## Configuración
 - Variable `NEXT_PUBLIC_API_URL` debe apuntar a la URL pública del backend.
 - Revisa `next.config.ts` para opciones de runtime.
