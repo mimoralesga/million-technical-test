@@ -3,7 +3,6 @@
 
 # Ejecuta pruebas del frontend antes de permitir el push
 echo "Running unit tests (frontend)..."
-cd nextjs-frontend || exit 1
 
 # Detectar gestor de paquetes
 if command -v pnpm >/dev/null 2>&1; then
