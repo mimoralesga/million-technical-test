@@ -8,7 +8,7 @@ export default function DetailsItem({
   value: string;
 }) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col" data-testid="details-item-container">
       <Label>{label}</Label>
       <span>{value}</span>
     </div>
