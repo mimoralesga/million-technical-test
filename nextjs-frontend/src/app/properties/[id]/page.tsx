@@ -15,7 +15,7 @@ export default async function PropertyDetails({
 }) {
   const { id } = await params;
   const property = await getPropertyById(id);
-  const { image, ownerDetails, trace } = property
+  const { image, ownerDetails, trace } = property;
 
   return (
     <>

@@ -7,7 +7,10 @@ export default function OwnerSection({ owner }: { owner: PropertyOwner }) {
       <span className="font-medium">Owner</span>
       <DetailsItem label="Name" value={owner.name} />
       <DetailsItem label="Address" value={owner.address} />
-      <DetailsItem label="Birthday" value={new Date(owner.birthday).toDateString()} />
+      <DetailsItem
+        label="Birthday"
+        value={new Date(owner.birthday).toDateString()}
+      />
     </section>
   );
 }

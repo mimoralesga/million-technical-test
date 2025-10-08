@@ -24,7 +24,9 @@ export default function TimelineTrace({ trace }: { trace: PropertyTrace[] }) {
         >
           <TimelineHeader>
             <TimelineSeparator className="group-data-[orientation=vertical]/timeline:-left-7 group-data-[orientation=vertical]/timeline:h-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=vertical]/timeline:translate-y-6.5" />
-            <TimelineDate>{new Date(item.saleDate).toDateString()}</TimelineDate>
+            <TimelineDate>
+              {new Date(item.saleDate).toDateString()}
+            </TimelineDate>
             <TimelineTitle>{formatCurrency(item.value)}</TimelineTitle>
             <TimelineIndicator className="group-data-completed/timeline-item:bg-primary group-data-completed/timeline-item:text-primary-foreground flex size-6 items-center justify-center group-data-completed/timeline-item:border-none group-data-[orientation=vertical]/timeline:-left-7">
               <CheckIcon
