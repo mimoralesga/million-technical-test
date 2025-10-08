@@ -1,6 +1,10 @@
 # Million Technical Test
 
 Guía para levantar el backend en .NET y el frontend en Next.js, enfocada en ejecución con Docker Compose y descripción de la estructura de ambos proyectos.
+<img width="1724" height="824" alt="Screenshot 2025-10-08 at 12 39 10 PM" src="https://github.com/user-attachments/assets/d211348a-b0e3-4226-8560-ebf26fbd12b4" />
+<img width="1722" height="826" alt="Screenshot 2025-10-08 at 12 39 46 PM" src="https://github.com/user-attachments/assets/59ee5cbb-39e3-49a7-8aa4-e5ae0f52c8e5" />
+
+
 
 ## Prerrequisitos
 - Docker y Docker Compose (Compose v2.22+ recomendado para `develop.watch`).
