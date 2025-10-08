@@ -14,7 +14,8 @@ export default async function PropertyDetails({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const property = await getPropertyById(Number(id));
+  const property = await getPropertyById(id);
+  const { image, ownerDetails, trace } = property
 
   return (
     <>
@@ -38,7 +39,7 @@ export default async function PropertyDetails({
               <section className="bg-background rounded shadow-xs border flex flex-col gap-4 overflow-hidden">
                 <img
                   className="size-full object-cover"
-                  src="https://placehold.co/600x400"
+                  src={image.fileUrl ?? "https://placehold.co/600x400"}
                   alt="Default profile background"
                   width={512}
                   height={96}
@@ -47,10 +48,10 @@ export default async function PropertyDetails({
               <DetailsSection property={property} />
             </div>
             <div className="flex-1 flex flex-col gap-4">
-              <OwnerSection owner={{}} />
+              <OwnerSection owner={ownerDetails} />
               <section className="bg-background rounded shadow-xs border flex flex-col gap-4 overflow-hidden p-4">
                 <span className="font-medium">Property Trace</span>
-                <TimelineTrace trace={[]} />
+                <TimelineTrace trace={trace} />
               </section>
             </div>
           </div>

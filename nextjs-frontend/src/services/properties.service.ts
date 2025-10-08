@@ -20,7 +20,7 @@ export const getProperties = async (
   });
 };
 
-export const getPropertyById = (id: number) => {
+export const getPropertyById = (id: string) => {
   return fetchClient<Property>(`/properties/${id}`, {
     method: "GET",
   });

@@ -1,5 +1,5 @@
 export interface PropertyTrace {
-  dateSale: Date;
+  saleDate: Date;
   name: string;
   value: number;
   tax: number;

@@ -33,7 +33,8 @@ public class GetPropertyDetailsHandler
             owner.Id.ToString(),
             owner.Name,
             owner.Address,
-            owner.Photo
+            owner.Photo,
+            owner.Birthday
         );
         
         var image = property.Images
@@ -41,7 +42,7 @@ public class GetPropertyDetailsHandler
             .ToList()
             .FirstOrDefault();
             
-        var traceDtos = property.Traces
+        var trace = property.Trace
             .Select(t => new TraceDto(t.DateSale, t.Name, t.Value, t.Tax))
             .ToList();
 
@@ -54,7 +55,7 @@ public class GetPropertyDetailsHandler
             property.CodeInternal,
             ownerDto,
             image,
-            traceDtos
+            trace
         );
     }
 }

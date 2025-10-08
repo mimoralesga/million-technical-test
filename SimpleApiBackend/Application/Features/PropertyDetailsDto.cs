@@ -11,14 +11,15 @@ public record PropertyDetailsDto(
     OwnerInfoDto OwnerDetails, 
 
     ImageDto? Image,
-    IReadOnlyList<TraceDto> Traces
+    IReadOnlyList<TraceDto> Trace
 );
 
 public record OwnerInfoDto(
     string Id,
     string Name,
     string Address,
-    string Photo
+    string Photo,
+    DateTime Birthday
 );
 
 public record ImageDto(

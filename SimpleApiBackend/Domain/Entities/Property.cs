@@ -19,5 +19,5 @@ public class Property
     public ObjectId OwnerId { get; set; }    
 
     public List<PropertyImage> Images { get; set; } = [];
-    public List<PropertyTrace> Traces { get; set; } = [];
+    public List<PropertyTrace> Trace { get; set; } = [];
 }

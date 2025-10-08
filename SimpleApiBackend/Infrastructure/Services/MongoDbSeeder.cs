@@ -30,7 +30,7 @@ public class MongoDbSeeder(IMongoDatabase database)
                 Photo = "/jhon.webp"
             };
 
-            var traces = new List<PropertyTrace>
+            var trace = new List<PropertyTrace>
             {
                 new()
                 {
@@ -71,7 +71,7 @@ public class MongoDbSeeder(IMongoDatabase database)
                                 Enabled = true
                             }
                         ],
-                        Traces = traces,
+                        Trace = trace,
                         Year = 2025
                     },
                     new Property {
@@ -86,7 +86,7 @@ public class MongoDbSeeder(IMongoDatabase database)
                                 Enabled = true
                             }
                         ],
-                        Traces = traces,
+                        Trace = trace,
                         Year = 2020
                     },
                     new Property {
@@ -101,7 +101,7 @@ public class MongoDbSeeder(IMongoDatabase database)
                                 Enabled = true
                             }
                         ],
-                        Traces = traces,
+                        Trace = trace,
                         Year = 2010
                     },
                 ]

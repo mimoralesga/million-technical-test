@@ -9,7 +9,7 @@ export interface Property {
   price: number;
   code: string;
   year: number;
-  owner: PropertyOwner;
+  ownerDetails: PropertyOwner;
   image: PropertyImage;
   trace: PropertyTrace[];
 }
